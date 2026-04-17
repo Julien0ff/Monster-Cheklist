@@ -288,12 +288,12 @@
             // 1. Détection Desktop Immédiate (QR Code)
             const isMobile = /android|iphone|ipad|ipod/i.test(userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
 
-            const EXPO_GO_URL = "exp://u.expo.dev/8610cfad-c5dd-4bd8-a30e-ca08c8f97d12?channel-name=main";
+            const EXPO_GO_URL = "https://u.expo.dev/8610cfad-c5dd-4bd8-a30e-ca08c8f97d12?channel-name=main";
 
             if (!isMobile) {
                 badge.innerText = "Poste de Contrôle";
                 title.innerText = "CONSOLE BUREAU";
-                desc.innerText = "Scannez ce QR Code avec votre téléphone pour ouvrir l'app dans Expo Go.";
+                desc.innerText = "Scannez ce QR Code avec votre téléphone pour ouvrir l'app directement dans Expo Go.";
                 btn.innerHTML = "👾 ACCÉDER AU GITHUB";
                 btn.href = "https://github.com/Julien0ff/Monster-Cheklist";
 
@@ -304,24 +304,23 @@
                     size: 200,
                     padding: 0
                 });
-                return; // On s'arrête là pour le PC
+                return;
             }
 
-            // 2. Logique Mobile — Expo Go (pas d'APK pour l'instant)
-
+            // 2. Logique Mobile — Accès direct via Expo Go
             if (/android/i.test(userAgent)) {
-                badge.innerText = "🤖 Android Détecté";
-                title.innerText = "DÉPLOYER L'UNITÉ";
-                desc.innerText = "Aucun APK disponible pour l'instant. Rejoignez la division via l'application <strong style='color:#00FF41'>Expo Go</strong> (gratuite sur le Play Store).";
-                btn.innerHTML = "🚀 OUVRIR DANS EXPO GO";
+                badge.innerText = "Android Détecté";
+                title.innerText = "ACCÈS CHEKLIST";
+                desc.innerHTML = "Lancez l'agent via l'application <strong style='color:#00FF41'>Expo Go</strong>.<br><br><small style='opacity:0.6'>Si l'app n'est pas installée, récupérez-la sur le Play Store.</small>";
+                btn.innerHTML = "🚀 LANCER DANS EXPO GO";
                 btn.href = EXPO_GO_URL;
             }
             else {
                 // iOS
-                badge.innerText = "🍎 iOS Détecté";
-                title.innerText = "RALLIER LA DIVISION";
-                desc.innerText = "Aucune app AppStore pour l'instant. Rejoignez la division via l'application <strong style='color:#00FF41'>Expo Go</strong> (gratuite sur l'App Store).";
-                btn.innerHTML = "🚀 OUVRIR DANS EXPO GO";
+                badge.innerText = "iOS Détecté";
+                title.innerText = "ACCÈS CHEKLIST";
+                desc.innerHTML = "Lancez l'agent via l'application <strong style='color:#00FF41'>Expo Go</strong>.<br><br><small style='opacity:0.6'>Disponible gratuitement sur l'App Store.</small>";
+                btn.innerHTML = "🚀 LANCER DANS EXPO GO";
                 btn.href = EXPO_GO_URL;
             }
         }

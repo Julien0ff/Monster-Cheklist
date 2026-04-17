@@ -61,9 +61,7 @@
         "projectId": "8610cfad-c5dd-4bd8-a30e-ca08c8f97d12"
       }
     },
-    "runtimeVersion": {
-      "policy": "appVersion"
-    },
+    "runtimeVersion": "exposdk:52.0.0",
     "updates": {
       "url": "https://u.expo.dev/8610cfad-c5dd-4bd8-a30e-ca08c8f97d12"
     }
