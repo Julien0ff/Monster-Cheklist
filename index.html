@@ -288,7 +288,7 @@
             // 1. Détection Desktop Immédiate (QR Code)
             const isMobile = /android|iphone|ipad|ipod/i.test(userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
 
-            const EXPO_GO_URL = "https://u.expo.dev/8610cfad-c5dd-4bd8-a30e-ca08c8f97d12?channel-name=main";
+            const BASE_URL = "https://u.expo.dev/8610cfad-c5dd-4bd8-a30e-ca08c8f97d12?channel-name=main&runtime-version=exposdk:52.0.0";
 
             if (!isMobile) {
                 badge.innerText = "Poste de Contrôle";
@@ -300,7 +300,8 @@
                 qrCont.style.display = 'block';
                 new QRious({
                     element: document.getElementById('qr'),
-                    value: EXPO_GO_URL,
+                    // Pour le scan, on peut rester sur le lien de base ou forcer android par défaut
+                    value: BASE_URL + "&platform=android",
                     size: 200,
                     padding: 0
                 });
@@ -313,7 +314,7 @@
                 title.innerText = "ACCÈS CHEKLIST";
                 desc.innerHTML = "Lancez l'agent via l'application <strong style='color:#00FF41'>Expo Go</strong>.<br><br><small style='opacity:0.6'>Si l'app n'est pas installée, récupérez-la sur le Play Store.</small>";
                 btn.innerHTML = "🚀 LANCER DANS EXPO GO";
-                btn.href = EXPO_GO_URL;
+                btn.href = BASE_URL + "&platform=android";
             }
             else {
                 // iOS
@@ -321,7 +322,7 @@
                 title.innerText = "ACCÈS CHEKLIST";
                 desc.innerHTML = "Lancez l'agent via l'application <strong style='color:#00FF41'>Expo Go</strong>.<br><br><small style='opacity:0.6'>Disponible gratuitement sur l'App Store.</small>";
                 btn.innerHTML = "🚀 LANCER DANS EXPO GO";
-                btn.href = EXPO_GO_URL;
+                btn.href = BASE_URL + "&platform=ios";
             }
         }
 
