@@ -136,26 +136,22 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   const signInWithDiscord = useCallback(async () => {
     try {
-      const redirectUrl = makeRedirectUri();
+      // On utilise le site web comme "Pont" pour éviter le crash d'Expo Go
+      const redirectUrl = "https://julien0ff.github.io/Monster-Cheklist";
 
-      console.log('--- DIAGNOSTIC AUTHENTIFICATION ---');
-      console.log('1. Vérifie que cette URL est dans Supabase (Redirect URLs) :');
-      console.log(redirectUrl);
-      console.log('2. Ton "Site URL" dans Supabase devrait idéalement être :');
-      console.log('http://localhost:8081 (Web) ou ' + redirectUrl + ' (Mobile)');
-      console.log('-----------------------------------');
+      console.log('[AUTH] Tentative de connexion via Pont Web...');
+      console.log('[AUTH] Redirect URI (Pont) :', redirectUrl);
 
       if (Platform.OS === 'web') {
         const { error } = await supabase.auth.signInWithOAuth({
           provider: 'discord',
-          options: {
-            redirectTo: redirectUrl,
-          },
+          options: { redirectTo: redirectUrl }
         });
         if (error) throw error;
         return;
       }
 
+      // Mobile
       const { data, error } = await supabase.auth.signInWithOAuth({
         provider: 'discord',
         options: {
@@ -167,22 +163,20 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       if (error) throw error;
       if (!data.url) throw new Error('No OAuth URL returned');
 
-      const result = await WebBrowser.openAuthSessionAsync(
-        data.url,
-        redirectUrl,
-      );
+      const result = await WebBrowser.openAuthSessionAsync(data.url, redirectUrl);
 
       if (result.type === 'success' && result.url) {
         const params = extractHashParams(result.url);
         if (params.access_token && params.refresh_token) {
-          await supabase.auth.setSession({
+          const { error: sessionError } = await supabase.auth.setSession({
             access_token: params.access_token,
             refresh_token: params.refresh_token,
           });
+          if (sessionError) throw sessionError;
         }
       }
     } catch (error) {
-      console.error('Discord OAuth error:', error);
+      console.error('[AUTH] Erreur critique :', error);
     }
   }, []);
 

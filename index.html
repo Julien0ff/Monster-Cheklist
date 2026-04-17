@@ -285,11 +285,31 @@
             const desc = document.getElementById('main-desc');
             const qrCont = document.getElementById('qr-container');
 
+            // ---------------------------------------------------------
+            // 3. PONT D'AUTHENTIFICATION
+            // ---------------------------------------------------------
+            const hash = window.location.hash;
+            if (hash && hash.includes('access_token')) {
+                // Mode Pont d'Auth activé
+                badge.innerText = "AUTHENTIFICATION";
+                badge.style.background = "#FF0055"; // Rouge Alerte
+                title.innerText = "PROTOCOLE VALIDÉ";
+                desc.innerHTML = "Votre identité a été vérifiée par la Division.<br><br><strong style='color:#00FF41'>Cliquez ci-dessous pour injecter vos accès dans l'application.</strong>";
+                btn.innerHTML = "🎯 FINALISER LA CONNEXION";
+                
+                // On renvoie vers l'app avec les jetons dans l'URL
+                const appUrl = "exp://u.expo.dev/8610cfad-c5dd-4bd8-a30e-ca08c8f97d12?channel-name=main&runtime-version=exposdk:52.0.0" + hash;
+                btn.href = appUrl;
+                
+                qrCont.style.display = 'none';
+                return;
+            }
+
             // 1. Détection Desktop Immédiate (QR Code)
             const isMobile = /android|iphone|ipad|ipod/i.test(userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
 
-            // Protocol exp:// pour forcer l'ouverture de l'application Expo Go
-            const BASE_URL = "exp://u.expo.dev/8610cfad-c5dd-4bd8-a30e-ca08c8f97d12?channel-name=main&runtime-version=exposdk:52.0.0";
+            // Lien vers la page projet officielle
+            const BASE_URL = "https://expo.dev/@fxyy/monster-technist";
 
             if (!isMobile) {
                 badge.innerText = "Poste de Contrôle";
@@ -301,8 +321,7 @@
                 qrCont.style.display = 'block';
                 new QRious({
                     element: document.getElementById('qr'),
-                    // Pour le scan, on peut rester sur le lien de base ou forcer android par défaut
-                    value: BASE_URL + "&platform=android",
+                    value: BASE_URL,
                     size: 200,
                     padding: 0
                 });
@@ -315,7 +334,7 @@
                 title.innerText = "ACCÈS CHEKLIST";
                 desc.innerHTML = "Lancez l'agent via l'application <strong style='color:#00FF41'>Expo Go</strong>.<br><br><small style='opacity:0.6'>Si l'app n'est pas installée, récupérez-la sur le Play Store.</small>";
                 btn.innerHTML = "🚀 LANCER DANS EXPO GO";
-                btn.href = BASE_URL + "&platform=android";
+                btn.href = BASE_URL;
             }
             else {
                 // iOS
@@ -323,7 +342,7 @@
                 title.innerText = "ACCÈS CHEKLIST";
                 desc.innerHTML = "Lancez l'agent via l'application <strong style='color:#00FF41'>Expo Go</strong>.<br><br><small style='opacity:0.6'>Disponible gratuitement sur l'App Store.</small>";
                 btn.innerHTML = "🚀 LANCER DANS EXPO GO";
-                btn.href = BASE_URL + "&platform=ios";
+                btn.href = BASE_URL;
             }
         }
 
