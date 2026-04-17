@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { AuthProvider, useAuth } from '../context/AuthContext';
-import { View, ActivityIndicator, Animated, Text, StyleSheet } from 'react-native';
+import { View, ActivityIndicator, Animated, Text, StyleSheet, Alert, Linking } from 'react-native';
 import { Colors } from '../constants/Colors';
 
 function SplashLoader() {
@@ -75,6 +75,39 @@ const splashStyles = StyleSheet.create({
 
 function RootLayoutNav() {
   const { session, isLoading, isGuest } = useAuth();
+
+  React.useEffect(() => {
+    const checkUpdate = async () => {
+      // On évite de checker en mode développement
+      if (__DEV__) return;
+      
+      try {
+        const repo = "Julien0ff/Monster-Cheklist";
+        const currentVersion = "1.0.0"; // Doit correspondre à package.json
+        
+        const response = await fetch(`https://api.github.com/repos/${repo}/releases/latest`);
+        const data = await response.json();
+        
+        if (data && data.tag_name && data.tag_name !== currentVersion) {
+          Alert.alert(
+            "💾 MISE À JOUR DISPONIBLE",
+            `L'unité Technist a été améliorée (${data.tag_name}). Voulez-vous déployer la mise à jour ?`,
+            [
+              { text: "PLUS TARD", style: "cancel" },
+              { 
+                text: "TÉLÉCHARGER", 
+                onPress: () => Linking.openURL('https://julien0ff.github.io/Monster-Cheklist/') 
+              }
+            ]
+          );
+        }
+      } catch (e) {
+        // Échec silencieux de la vérification
+      }
+    };
+
+    checkUpdate();
+  }, []);
 
   if (isLoading) {
     return <SplashLoader />;

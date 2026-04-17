@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MONSTER TECHNIST | Accès Division</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
     <style>
         :root {
             --primary: #00FF41;
@@ -141,8 +142,13 @@
             font-weight: 900;
             font-size: 1rem;
             letter-spacing: 1px;
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: all 0.2s ease;
             box-shadow: 0 0 20px var(--primary-glow);
+            cursor: pointer;
+            position: relative;
+            z-index: 100;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .btn:hover {
@@ -163,6 +169,22 @@
         .secondary-info a {
             color: var(--primary);
             text-decoration: none;
+        }
+
+        #qr-container {
+            margin: 1.5rem auto;
+            background: #fff;
+            padding: 10px;
+            border-radius: 12px;
+            display: none;
+            width: 150px;
+            height: 150px;
+            box-shadow: 0 0 20px rgba(255,255,255,0.1);
+        }
+
+        canvas#qr {
+            width: 100%;
+            height: 100%;
         }
 
         /* Animations */
@@ -197,6 +219,10 @@
             <h2 id="main-title">DÉPLOIEMENT DE L'AGENT</h2>
             <p id="main-desc">Rejoignez la division Monster Technist et commencez l'archivage de votre collection.</p>
             
+            <div id="qr-container">
+                <canvas id="qr"></canvas>
+            </div>
+
             <a href="#" id="download-btn" class="btn">
                 <span>INITIALISER L'APP</span>
             </a>
@@ -254,34 +280,54 @@
         }
 
         async function detectOS() {
-            const userAgent = window.navigator.userAgent;
+            const userAgent = window.navigator.userAgent || window.navigator.vendor || window.opera;
             const btn = document.getElementById('download-btn');
             const badge = document.getElementById('os-badge');
             const title = document.getElementById('main-title');
             const desc = document.getElementById('main-desc');
 
-            const latestApk = await getLatestRelease();
+            // Feedback visuel pendant le chargement
+            btn.style.opacity = "0.5";
+            btn.style.pointerEvents = "none";
+            btn.innerText = "INITIALISATION...";
 
+            const latestApk = await getLatestRelease();
+            
+            btn.style.opacity = "1";
+            btn.style.pointerEvents = "auto";
+
+            // Détection Android
             if (/android/i.test(userAgent)) {
                 badge.innerText = "Android Détecté";
                 title.innerText = "DÉPLOYER L'UNITÉ";
-                desc.innerText = "Téléchargez la dernière version de combat (APK) directement.";
-                btn.innerHTML = "📥 TÉLÉCHARGER L'UNITÉ";
+                desc.innerText = "Téléchargez la version de combat (APK) pour Android.";
+                btn.innerHTML = "📥 TÉLÉCHARGER L'APK";
                 btn.href = latestApk || "https://github.com/Julien0ff/Monster-Cheklist/releases";
             } 
-            else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+            // Détection iOS (incluant iPadOS moderne)
+            else if (/iPad|iPhone|iPod/.test(userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)) {
                 badge.innerText = "iOS Détecté";
                 title.innerText = "RALLIER LA DIVISION";
-                desc.innerText = "Rejoignez la division via Expo Go pour un déploiement sécurisé.";
+                desc.innerText = "Rejoignez la division via l'application Expo Go.";
                 btn.innerHTML = "🔗 OUVRIR DANS EXPO GO";
                 btn.href = "exp://u.expo.dev/c2f86105-0398-456c-a5a9-3ac96801b5e8?release-channel=default";
             } 
+            // Fallback Desktop
             else {
                 badge.innerText = "Poste de Contrôle";
                 title.innerText = "CONSOLE BUREAU";
-                desc.innerText = "Scannez ce QR Code ou ouvrez ce lien sur mobile pour initialiser l'app.";
-                btn.innerHTML = "👾 VOIR SUR GITHUB";
+                desc.innerText = "Scannez ce QR Code avec votre téléphone pour accéder au site sur mobile.";
+                btn.innerHTML = "👾 ACCÉDER AU GITHUB";
                 btn.href = "https://github.com/Julien0ff/Monster-Cheklist";
+                
+                const qrCont = document.getElementById('qr-container');
+                qrCont.style.display = 'block';
+                new QRious({
+                    element: document.getElementById('qr'),
+                    value: window.location.href,
+                    size: 200,
+                    padding: 0
+                });
             }
         }
 
