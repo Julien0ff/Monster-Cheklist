@@ -4,11 +4,11 @@
     "slug": "monster-technist",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "assets/icon.png",
+    "icon": "assets/clean-icon.png",
     "userInterfaceStyle": "dark",
     "newArchEnabled": false,
     "splash": {
-      "image": "assets/icon.png",
+      "image": "assets/clean-icon.png",
       "resizeMode": "cover",
       "backgroundColor": "#000000"
     },
@@ -21,7 +21,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "assets/icon.png",
+        "foregroundImage": "assets/clean-icon.png",
         "backgroundColor": "#000000"
       },
       "package": "com.monster.technist",
@@ -40,8 +40,21 @@
           "cameraPermission": "Autoriser l'application à utiliser la caméra pour scanner les canettes."
         }
       ],
-      "expo-web-browser"
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "kotlinVersion": "1.9.25"
+          }
+        }
+      ]
     ],
-    "scheme": "monster-technist"
+    "scheme": "monster-technist",
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "8610cfad-c5dd-4bd8-a30e-ca08c8f97d12"
+      }
+    }
   }
 }
