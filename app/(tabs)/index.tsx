@@ -107,7 +107,7 @@ export default function CatalogueScreen() {
             source={{ uri: item.image }}
             style={styles.image}
             resizeMode="contain"
-            defaultSource={require('../../assets/icon.png')}
+            defaultSource={require('../../assets/clean-icon.png')}
           />
           <View style={styles.badgeCaffeine}>
             <Zap size={9} stroke={Colors.primary} strokeWidth={3} />

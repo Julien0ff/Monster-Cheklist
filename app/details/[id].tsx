@@ -145,7 +145,7 @@ export default function MonsterDetails() {
             source={{ uri: monster.image }}
             style={styles.heroImage}
             resizeMode="contain"
-            defaultSource={require('../../assets/icon.png')}
+            defaultSource={require('../../assets/clean-icon.png')}
           />
         </Animated.View>
 
