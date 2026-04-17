@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "Monster Technist",
+    "name": "Monster Cheklist",
     "slug": "monster-technist",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -26,7 +26,12 @@
       },
       "package": "com.monster.technist",
       "permissions": [
-        "CAMERA"
+        "CAMERA",
+        "android.permission.CAMERA",
+        "android.permission.RECORD_AUDIO",
+        "CAMERA",
+        "android.permission.CAMERA",
+        "android.permission.RECORD_AUDIO"
       ]
     },
     "web": {
@@ -55,6 +60,12 @@
       "eas": {
         "projectId": "8610cfad-c5dd-4bd8-a30e-ca08c8f97d12"
       }
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/8610cfad-c5dd-4bd8-a30e-ca08c8f97d12"
     }
   }
 }

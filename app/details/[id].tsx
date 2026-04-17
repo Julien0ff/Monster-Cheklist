@@ -115,7 +115,7 @@ export default function MonsterDetails() {
     if (!monster) return;
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
     await Share.share({
-      message: `🔋 ${monster.name} — ${monster.caffeine}mg de caféine !\nAjoutée à ma collection Monster Technist 🎯\n#MonsterTechnist #MonsterEnergy`,
+      message: `🔋 ${monster.name} — ${monster.caffeine}mg de caféine !\nAjoutée à ma collection Monster Cheklist 🎯\n#MonsterCheklist #MonsterEnergy`,
     });
   };
 

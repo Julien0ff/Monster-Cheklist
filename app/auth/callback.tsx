@@ -72,7 +72,7 @@ export default function AuthCallback() {
       </View>
 
       <View style={styles.footer}>
-        <Text style={styles.footerText}>MONSTER TECHNIST • SECURE CALLBACK</Text>
+        <Text style={styles.footerText}>MONSTER CHEKLIST • SECURE CALLBACK</Text>
       </View>
     </View>
   );

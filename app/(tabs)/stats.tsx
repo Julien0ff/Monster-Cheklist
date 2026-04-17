@@ -131,7 +131,7 @@ export default function StatsScreen() {
       desc: 'Variétés trouvées',
     },
     {
-      label: 'Niveau Technist',
+      label: 'Niveau Cheklist',
       value: level,
       suffix: '',
       icon: <TrendingUp size={20} stroke={Colors.accentBlue} strokeWidth={2} />,
@@ -172,7 +172,7 @@ export default function StatsScreen() {
     },
     {
       icon: Target,
-      label: 'TECHNIST SUPREME',
+      label: 'CHEKLIST SUPREME',
       desc: '50 canettes archivées',
       unlocked: totalItems >= 50,
       progress: Math.min(totalItems / 50, 1),
@@ -190,7 +190,7 @@ export default function StatsScreen() {
           </View>
           <View style={styles.headerInfo}>
             <Text style={styles.userName}>
-              {isGuest ? 'AGENT INVITÉ' : user?.email?.split('@')[0]?.toUpperCase() || 'AGENT TECHNIST'}
+              {isGuest ? 'AGENT INVITÉ' : user?.email?.split('@')[0]?.toUpperCase() || 'AGENT CHEKLIST'}
             </Text>
             <Text style={styles.userStatus}>NIVEAU {level} • SESSION ACTIVE</Text>
             <AnimatedProgressBar progress={levelProgress} color={Colors.accentBlue} />

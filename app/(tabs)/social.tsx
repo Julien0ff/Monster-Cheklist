@@ -161,7 +161,7 @@ export default function SocialScreen() {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
     try {
       await Share.share({
-        message: `🔋 Ma collection Monster Technist :\n\n• ${totalMonsters} canettes collectées\n• ${uniqueMonsters} variétés uniques\n• ${totalCaffeine}mg de caféine cumulée\n• Niveau ${level}\n\n😎 Mon Code Agent : \`\`\`\n${agentId}\`\`\`\n#MonsterTechnist`,
+        message: `🔋 Ma collection Monster Cheklist :\n\n• ${totalMonsters} canettes collectées\n• ${uniqueMonsters} variétés uniques\n• ${totalCaffeine}mg de caféine cumulée\n• Niveau ${level}\n\n😎 Mon Code Agent : \`\`\`\n${agentId}\`\`\`\n#MonsterCheklist`,
       });
     } catch (error) {
       console.error(error);

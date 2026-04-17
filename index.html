@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MONSTER TECHNIST | Accès Division</title>
+    <title>MONSTER CHEKLIST | Accès Division</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
     <style>
@@ -210,14 +210,14 @@
 
     <div class="container">
         <div class="logo-wrap">
-            <h1 class="logo">TECHNIST</h1>
+            <h1 class="logo">CHEKLIST</h1>
             <p class="tagline">DIVISION PROTOCOL EX-54</p>
         </div>
 
         <div class="card">
             <div id="os-badge" class="os-badge">Détection en cours...</div>
             <h2 id="main-title">DÉPLOIEMENT DE L'AGENT</h2>
-            <p id="main-desc">Rejoignez la division Monster Technist et commencez l'archivage de votre collection.</p>
+            <p id="main-desc">Rejoignez la division Monster Cheklist et commencez l'archivage de votre collection.</p>
             
             <div id="qr-container">
                 <canvas id="qr"></canvas>
@@ -259,27 +259,9 @@
         }
         setInterval(drawMatrix, 33);
 
-        // GitHub Release Detection
-        async function getLatestRelease() {
-            const repo = "Julien0ff/Monster-Cheklist";
-            const btn = document.getElementById('download-btn');
-            
-            try {
-                const response = await fetch(`https://api.github.com/repos/${repo}/releases/latest`);
-                const data = await response.json();
-                
-                // Find APK in assets
-                const apk = data.assets.find(asset => asset.name.endsWith('.apk'));
-                if (apk) {
-                    return apk.browser_download_url;
-                }
-            } catch (e) {
-                console.error("Erreur fetch GitHub:", e);
-            }
-            return null;
-        }
+        // Pas d'APK pour l'instant — tout passe par Expo Go
 
-        async function detectOS() {
+        function detectOS() {
             const userAgent = window.navigator.userAgent || window.navigator.vendor || window.opera;
             const btn = document.getElementById('download-btn');
             const badge = document.getElementById('os-badge');
@@ -290,47 +272,41 @@
             // 1. Détection Desktop Immédiate (QR Code)
             const isMobile = /android|iphone|ipad|ipod/i.test(userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
 
+            const EXPO_GO_URL = "exp://u.expo.dev/8610cfad-c5dd-4bd8-a30e-ca08c8f97d12?channel-name=main";
+
             if (!isMobile) {
                 badge.innerText = "Poste de Contrôle";
                 title.innerText = "CONSOLE BUREAU";
-                desc.innerText = "Scannez ce QR Code avec votre téléphone pour accéder au site sur mobile.";
+                desc.innerText = "Scannez ce QR Code avec votre téléphone pour ouvrir l'app dans Expo Go.";
                 btn.innerHTML = "👾 ACCÉDER AU GITHUB";
                 btn.href = "https://github.com/Julien0ff/Monster-Cheklist";
                 
                 qrCont.style.display = 'block';
                 new QRious({
                     element: document.getElementById('qr'),
-                    value: window.location.href.startsWith('file') ? "https://github.com/Julien0ff/Monster-Cheklist" : window.location.href,
+                    value: EXPO_GO_URL,
                     size: 200,
                     padding: 0
                 });
                 return; // On s'arrête là pour le PC
             }
 
-            // 2. Logique Mobile Asynchrone
-            btn.style.opacity = "0.5";
-            btn.style.pointerEvents = "none";
-            btn.innerText = "INITIALISATION...";
-
-            const latestApk = await getLatestRelease();
-            
-            btn.style.opacity = "1";
-            btn.style.pointerEvents = "auto";
+            // 2. Logique Mobile — Expo Go (pas d'APK pour l'instant)
 
             if (/android/i.test(userAgent)) {
-                badge.innerText = "Android Détecté";
+                badge.innerText = "🤖 Android Détecté";
                 title.innerText = "DÉPLOYER L'UNITÉ";
-                desc.innerText = "Téléchargez la version de combat (APK) pour Android.";
-                btn.innerHTML = "📥 TÉLÉCHARGER L'APK";
-                btn.href = latestApk || "https://github.com/Julien0ff/Monster-Cheklist/releases";
+                desc.innerText = "Aucun APK disponible pour l'instant. Rejoignez la division via l'application <strong style='color:#00FF41'>Expo Go</strong> (gratuite sur le Play Store).";
+                btn.innerHTML = "🚀 OUVRIR DANS EXPO GO";
+                btn.href = EXPO_GO_URL;
             } 
             else {
                 // iOS
-                badge.innerText = "iOS Détecté";
+                badge.innerText = "🍎 iOS Détecté";
                 title.innerText = "RALLIER LA DIVISION";
-                desc.innerText = "Rejoignez la division via l'application Expo Go.";
-                btn.innerHTML = "🔗 OUVRIR DANS EXPO GO";
-                btn.href = "exp://u.expo.dev/c2f86105-0398-456c-a5a9-3ac96801b5e8?release-channel=default";
+                desc.innerText = "Aucune app AppStore pour l'instant. Rejoignez la division via l'application <strong style='color:#00FF41'>Expo Go</strong> (gratuite sur l'App Store).";
+                btn.innerHTML = "🚀 OUVRIR DANS EXPO GO";
+                btn.href = EXPO_GO_URL;
             }
         }
 

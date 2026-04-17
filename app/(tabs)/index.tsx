@@ -141,7 +141,7 @@ export default function CatalogueScreen() {
       {/* Title bar */}
       <Animated.View style={[styles.titleBar, { opacity: headerFade }]}>
         <View>
-          <Text style={styles.appTitle}>MONSTER TECHNIST</Text>
+          <Text style={styles.appTitle}>MONSTER CHEKLIST</Text>
           <Text style={styles.collectionCount}>
             {collection.length} ARCHIVE{collection.length !== 1 ? 'S' : ''} • {isGuest ? 'MODE INVITÉ' : user?.user_metadata?.full_name}
           </Text>

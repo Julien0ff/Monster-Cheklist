@@ -22,7 +22,7 @@ function SplashLoader() {
       <Animated.View style={[splashStyles.logoContainer, { opacity: pulseAnim }]}>  
         <Text style={splashStyles.logo}>M</Text>
       </Animated.View>
-      <Text style={splashStyles.title}>MONSTER TECHNIST</Text>
+      <Text style={splashStyles.title}>MONSTER CHEKLIST</Text>
       <Animated.View style={{ opacity: pulseAnim }}>
         <Text style={splashStyles.subtitle}>INITIALISATION DU SYSTÈME...</Text>
       </Animated.View>
@@ -91,7 +91,7 @@ function RootLayoutNav() {
         if (data && data.tag_name && data.tag_name !== currentVersion) {
           Alert.alert(
             "💾 MISE À JOUR DISPONIBLE",
-            `L'unité Technist a été améliorée (${data.tag_name}). Voulez-vous déployer la mise à jour ?`,
+            `L'unité Cheklist a été améliorée (${data.tag_name}). Voulez-vous déployer la mise à jour ?`,
             [
               { text: "PLUS TARD", style: "cancel" },
               { 

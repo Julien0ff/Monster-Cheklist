@@ -1,5 +1,5 @@
 /**
- * Monster Technist — Premium Cyber-Tech Color System
+ * Monster Cheklist — Premium Cyber-Tech Color System
  */
 export const Colors = {
   // ─── Core ─────────────────────────────────────

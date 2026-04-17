@@ -102,7 +102,7 @@ export default function LoginScreen() {
           </View>
         </View>
 
-        <Text style={styles.title}>MONSTER{'\n'}TECHNIST</Text>
+        <Text style={styles.title}>MONSTER{'\n'}CHEKLIST</Text>
         <View style={styles.subtitleRow}>
           <Shield size={12} stroke={Colors.primary} strokeWidth={2} />
           <Text style={styles.subtitle}>SYSTÈME D'ARCHIVAGE ÉNERGÉTIQUE</Text>
@@ -151,7 +151,7 @@ export default function LoginScreen() {
       </Animated.View>
 
       {/* Footer */}
-      <Text style={styles.footer}>v1.0 • MONSTER TECHNIST • SYSTÈME CRYPTÉ</Text>
+      <Text style={styles.footer}>v1.0 • MONSTER CHEKLIST • SYSTÈME CRYPTÉ</Text>
     </View>
   );
 }
