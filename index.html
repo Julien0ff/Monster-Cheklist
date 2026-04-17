@@ -285,8 +285,29 @@
             const badge = document.getElementById('os-badge');
             const title = document.getElementById('main-title');
             const desc = document.getElementById('main-desc');
+            const qrCont = document.getElementById('qr-container');
 
-            // Feedback visuel pendant le chargement
+            // 1. Détection Desktop Immédiate (QR Code)
+            const isMobile = /android|iphone|ipad|ipod/i.test(userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+
+            if (!isMobile) {
+                badge.innerText = "Poste de Contrôle";
+                title.innerText = "CONSOLE BUREAU";
+                desc.innerText = "Scannez ce QR Code avec votre téléphone pour accéder au site sur mobile.";
+                btn.innerHTML = "👾 ACCÉDER AU GITHUB";
+                btn.href = "https://github.com/Julien0ff/Monster-Cheklist";
+                
+                qrCont.style.display = 'block';
+                new QRious({
+                    element: document.getElementById('qr'),
+                    value: window.location.href.startsWith('file') ? "https://github.com/Julien0ff/Monster-Cheklist" : window.location.href,
+                    size: 200,
+                    padding: 0
+                });
+                return; // On s'arrête là pour le PC
+            }
+
+            // 2. Logique Mobile Asynchrone
             btn.style.opacity = "0.5";
             btn.style.pointerEvents = "none";
             btn.innerText = "INITIALISATION...";
@@ -296,7 +317,6 @@
             btn.style.opacity = "1";
             btn.style.pointerEvents = "auto";
 
-            // Détection Android
             if (/android/i.test(userAgent)) {
                 badge.innerText = "Android Détecté";
                 title.innerText = "DÉPLOYER L'UNITÉ";
@@ -304,30 +324,13 @@
                 btn.innerHTML = "📥 TÉLÉCHARGER L'APK";
                 btn.href = latestApk || "https://github.com/Julien0ff/Monster-Cheklist/releases";
             } 
-            // Détection iOS (incluant iPadOS moderne)
-            else if (/iPad|iPhone|iPod/.test(userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)) {
+            else {
+                // iOS
                 badge.innerText = "iOS Détecté";
                 title.innerText = "RALLIER LA DIVISION";
                 desc.innerText = "Rejoignez la division via l'application Expo Go.";
                 btn.innerHTML = "🔗 OUVRIR DANS EXPO GO";
                 btn.href = "exp://u.expo.dev/c2f86105-0398-456c-a5a9-3ac96801b5e8?release-channel=default";
-            } 
-            // Fallback Desktop
-            else {
-                badge.innerText = "Poste de Contrôle";
-                title.innerText = "CONSOLE BUREAU";
-                desc.innerText = "Scannez ce QR Code avec votre téléphone pour accéder au site sur mobile.";
-                btn.innerHTML = "👾 ACCÉDER AU GITHUB";
-                btn.href = "https://github.com/Julien0ff/Monster-Cheklist";
-                
-                const qrCont = document.getElementById('qr-container');
-                qrCont.style.display = 'block';
-                new QRious({
-                    element: document.getElementById('qr'),
-                    value: window.location.href,
-                    size: 200,
-                    padding: 0
-                });
             }
         }
 
