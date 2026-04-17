@@ -288,7 +288,8 @@
             // 1. Détection Desktop Immédiate (QR Code)
             const isMobile = /android|iphone|ipad|ipod/i.test(userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
 
-            const BASE_URL = "https://u.expo.dev/8610cfad-c5dd-4bd8-a30e-ca08c8f97d12?channel-name=main&runtime-version=exposdk:52.0.0";
+            // Protocol exp:// pour forcer l'ouverture de l'application Expo Go
+            const BASE_URL = "exp://u.expo.dev/8610cfad-c5dd-4bd8-a30e-ca08c8f97d12?channel-name=main&runtime-version=exposdk:52.0.0";
 
             if (!isMobile) {
                 badge.innerText = "Poste de Contrôle";
