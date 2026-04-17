@@ -1,0 +1,47 @@
+{
+  "expo": {
+    "name": "Monster Technist",
+    "slug": "monster-technist",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "assets/icon.png",
+    "userInterfaceStyle": "dark",
+    "newArchEnabled": false,
+    "splash": {
+      "image": "assets/icon.png",
+      "resizeMode": "cover",
+      "backgroundColor": "#000000"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.monster.technist"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "assets/icon.png",
+        "backgroundColor": "#000000"
+      },
+      "package": "com.monster.technist",
+      "permissions": [
+        "CAMERA"
+      ]
+    },
+    "web": {
+      "favicon": "assets/icon.png"
+    },
+    "plugins": [
+      "expo-router",
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Autoriser l'application à utiliser la caméra pour scanner les canettes."
+        }
+      ],
+      "expo-web-browser"
+    ],
+    "scheme": "monster-technist"
+  }
+}
