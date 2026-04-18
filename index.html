@@ -168,6 +168,19 @@
             transform: translateY(0) scale(0.98);
         }
 
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+            margin-top: 1rem;
+            box-shadow: none;
+        }
+
+        .btn-outline:hover {
+            background: rgba(0, 255, 65, 0.05);
+            box-shadow: 0 0 15px var(--primary-glow);
+        }
+
         .secondary-info {
             margin-top: 2rem;
             font-size: 0.75rem;
@@ -241,6 +254,10 @@
 
             <a href="https://github.com/Julien0ff/Monster-Cheklist" id="download-btn" class="btn">
                 <span>DÉPLOYER L'UNITÉ</span>
+            </a>
+
+            <a href="https://expo.dev/@fxyy/monster-technist" id="apk-btn" class="btn btn-outline" style="display: none;">
+                <span>INSTALLER L'UNITÉ (APK)</span>
             </a>
 
             <div class="secondary-info">
@@ -342,9 +359,14 @@
             if (/android/i.test(userAgent)) {
                 badge.innerText = "Android Détecté";
                 title.innerText = "ACCÈS CHEKLIST";
-                desc.innerHTML = "Lancez l'agent via la Division <strong style='color:#00FF41'>Monster Cheklist</strong>.<br><br><small style='opacity:0.6'>Installez l'unité via le build envoyé par la Division.</small>";
+                desc.innerHTML = "Lancez l'agent via la Division <strong style='color:#00FF41'>Monster Cheklist</strong>.<br><br><small style='opacity:0.6'>Si l'app n'est pas installée, téléchargez l'APK ci-dessous.</small>";
                 btn.innerHTML = "🚀 OUVRIR L'APPLICATION";
                 btn.href = CUSTOM_SCHEME;
+                
+                // Bouton APK
+                const apkBtn = document.getElementById('apk-btn');
+                apkBtn.style.display = 'flex';
+                apkBtn.href = "https://expo.dev/accounts/fxyy/projects/monster-technist/builds/ec6e62c6-880a-4247-997d-0fbf6abd0ede";
             }
             else {
                 // iOS - Utilisation du lien Expo Go officiel pour éviter l'erreur Safari
