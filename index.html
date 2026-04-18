@@ -47,7 +47,7 @@
             background: var(--primary);
             box-shadow: 0 0 20px var(--primary);
             opacity: 0.1;
-            z-index: 10;
+            z-index: 2; /* Derrière le contenu (5) */
             animation: scanning 4s linear infinite;
         }
 
@@ -185,8 +185,8 @@
             padding: 10px;
             border-radius: 12px;
             display: none;
-            width: 150px;
-            height: 150px;
+            width: 170px;
+            height: 170px;
             box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
         }
 
@@ -215,7 +215,7 @@
             width: 100%;
             height: 100%;
             z-index: 1;
-            opacity: 0.03;
+            opacity: 0.015; /* Encore plus subtil pour restaurer l'effet "caché" */
             pointer-events: none;
         }
     </style>
@@ -283,7 +283,9 @@
             const badge = document.getElementById('os-badge');
             const title = document.getElementById('main-title');
             const desc = document.getElementById('main-desc');
-            const qrCont = document.getElementById('qr-conta            // ---------------------------------------------------------
+            const qrCont = document.getElementById('qr-container');
+
+            // ---------------------------------------------------------
             // 3. PONT D'AUTHENTIFICATION
             // ---------------------------------------------------------
             const hash = window.location.hash;
@@ -311,8 +313,9 @@
                 return;
             }
 
-            // 1. Détection Desktop Immédiate (QR Code)
-            const isMobile = /android|iphone|ipad|ipod/i.test(userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+            // 1. Détection Mobile Améliorée (iPad/iPhone Safari inclus)
+            const isMobile = /android|iphone|ipad|ipod/i.test(userAgent) || 
+                            (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
 
             // Lien vers la page projet officielle
             const BASE_URL = "https://expo.dev/@fxyy/monster-technist";
@@ -348,9 +351,7 @@
                 badge.innerText = "iOS Détecté";
                 title.innerText = "ACCÈS CHEKLIST";
                 desc.innerHTML = "Lancez l'agent via l'application <strong style='color:#00FF41'>Expo Go</strong>.<br><br><small style='opacity:0.6'>Disponible gratuitement sur l'App Store.</small>";
-                btn.innerHTML = "🚀 LANCER DANS EXPO GO";
                 btn.href = "https://expo.dev/expo-go?url=" + encodeURIComponent(BASE_URL);
-            }=" + encodeURIComponent(BASE_URL);
             }
         }
 
