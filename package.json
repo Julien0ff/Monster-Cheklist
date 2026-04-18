@@ -7,7 +7,8 @@
     "dev": "expo start",
     "android": "expo run:android",
     "ios": "expo run:ios",
-    "web": "expo start --web"
+    "web": "expo start --web",
+    "eas-build-pre-install": "npm config set legacy-peer-deps true"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "2.2.0",
@@ -45,17 +46,10 @@
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
-    "@types/react": "~19.1.10",
-    "typescript": "^5.3.3"
-  },
-  "overrides": {
-    "react": "19.1.0",
-    "react-dom": "19.1.0",
-    "lucide-react-native": {
-      "react": "$react"
-    },
     "@react-native/metro-config": "0.81.5",
-    "metro-config": "0.81.5"
+    "@types/react": "~19.1.10",
+    "metro-config": "0.81.5",
+    "typescript": "^5.3.3"
   },
   "private": true
 }

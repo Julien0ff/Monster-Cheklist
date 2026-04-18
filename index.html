@@ -215,7 +215,7 @@
             width: 100%;
             height: 100%;
             z-index: 1;
-            opacity: 0.015; /* Encore plus subtil pour restaurer l'effet "caché" */
+            opacity: 0.008; /* Quasiment invisible, effet "caché" restauré */
             pointer-events: none;
         }
     </style>
@@ -351,6 +351,7 @@
                 badge.innerText = "iOS Détecté";
                 title.innerText = "ACCÈS CHEKLIST";
                 desc.innerHTML = "Lancez l'agent via l'application <strong style='color:#00FF41'>Expo Go</strong>.<br><br><small style='opacity:0.6'>Disponible gratuitement sur l'App Store.</small>";
+                btn.innerHTML = "🚀 LANCER DANS EXPO GO";
                 btn.href = "https://expo.dev/expo-go?url=" + encodeURIComponent(BASE_URL);
             }
         }
