@@ -6,7 +6,7 @@
     "orientation": "portrait",
     "icon": "assets/clean-icon.png",
     "userInterfaceStyle": "dark",
-    "newArchEnabled": false,
+    "newArchEnabled": true,
     "splash": {
       "image": "assets/clean-icon.png",
       "resizeMode": "cover",
