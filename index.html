@@ -298,9 +298,11 @@
                 btn.innerHTML = "🎯 FINALISER LA CONNEXION";
                 
                 // On renvoie vers l'app avec les jetons dans l'URL
-                // Mise à jour vers SDK 54
-                const appUrl = "exp://u.expo.dev/8610cfad-c5dd-4bd8-a30e-ca08c8f97d12?channel-name=main&runtime-version=exposdk:54.0.0" + hash;
-                btn.href = appUrl;
+                // Utilisation du redirecteur Expo Go pour iOS
+                const expoUrl = "exp://u.expo.dev/8610cfad-c5dd-4bd8-a30e-ca08c8f97d12?channel-name=main&runtime-version=exposdk:54.0.0" + hash;
+                const safariFriendlyUrl = "https://expo.dev/expo-go?url=" + encodeURIComponent(expoUrl);
+                
+                btn.href = safariFriendlyUrl;
                 
                 qrCont.style.display = 'none';
                 return;
@@ -311,7 +313,6 @@
 
             // Lien vers la page projet officielle
             const BASE_URL = "https://expo.dev/@fxyy/monster-technist";
-            const CUSTOM_SCHEME = "monster-technist://";
 
             if (!isMobile) {
                 badge.innerText = "Poste de Contrôle";
@@ -339,13 +340,12 @@
                 btn.href = BASE_URL;
             }
             else {
-                // iOS
+                // iOS - Utilisation du lien Expo Go officiel pour éviter l'erreur Safari
                 badge.innerText = "iOS Détecté";
                 title.innerText = "ACCÈS CHEKLIST";
-                desc.innerHTML = "Lancez l'agent via la Division <strong style='color:#00FF41'>Monster Cheklist</strong>.<br><br><small style='opacity:0.6'>Utilisez le lien direct pour ouvrir votre build.</small>";
-                btn.innerHTML = "🚀 OUVRIR L'APPLICATION";
-                // On privilégie le custom scheme sur iOS pour éviter de rester dans le navigateur
-                btn.href = CUSTOM_SCHEME;
+                desc.innerHTML = "Lancez l'agent via l'application <strong style='color:#00FF41'>Expo Go</strong>.<br><br><small style='opacity:0.6'>Disponible gratuitement sur l'App Store.</small>";
+                btn.innerHTML = "🚀 LANCER DANS EXPO GO";
+                btn.href = "https://expo.dev/expo-go?url=" + encodeURIComponent(BASE_URL);
             }
         }
 
