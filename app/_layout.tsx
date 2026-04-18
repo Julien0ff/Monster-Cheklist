@@ -73,6 +73,8 @@ const splashStyles = StyleSheet.create({
   },
 });
 
+import * as WebBrowser from 'expo-web-browser';
+
 function RootLayoutNav() {
   const { session, isLoading, isGuest } = useAuth();
 
@@ -96,7 +98,7 @@ function RootLayoutNav() {
               { text: "PLUS TARD", style: "cancel" },
               { 
                 text: "TÉLÉCHARGER", 
-                onPress: () => Linking.openURL('https://julien0ff.github.io/Monster-Cheklist/') 
+                onPress: () => WebBrowser.openBrowserAsync('https://julien0ff.github.io/Monster-Cheklist/') 
               }
             ]
           );
@@ -134,11 +136,15 @@ function RootLayoutNav() {
   );
 }
 
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+
 export default function RootLayout() {
   return (
-    <AuthProvider>
-      <StatusBar style="light" />
-      <RootLayoutNav />
-    </AuthProvider>
+    <SafeAreaProvider>
+      <AuthProvider>
+        <StatusBar style="light" />
+        <RootLayoutNav />
+      </AuthProvider>
+    </SafeAreaProvider>
   );
 }

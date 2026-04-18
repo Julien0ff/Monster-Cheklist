@@ -52,7 +52,9 @@
             "kotlinVersion": "1.9.25"
           }
         }
-      ]
+      ],
+      "expo-asset",
+      "expo-web-browser"
     ],
     "scheme": "monster-technist",
     "extra": {
@@ -61,7 +63,7 @@
         "projectId": "8610cfad-c5dd-4bd8-a30e-ca08c8f97d12"
       }
     },
-    "runtimeVersion": "exposdk:52.0.0",
+    "runtimeVersion": "exposdk:54.0.0",
     "updates": {
       "url": "https://u.expo.dev/8610cfad-c5dd-4bd8-a30e-ca08c8f97d12"
     }
